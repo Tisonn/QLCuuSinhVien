@@ -293,5 +293,11 @@ namespace QLCuuSinhVien.CustomControls
                 }
             }
         }
+
+        private void btn_Chat_Click(object sender, EventArgs e)
+        {
+            Chatbox chatbox = new Chatbox();
+            chatbox.Show();
+        }
     }
 }

@@ -43,6 +43,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.btn_Chat = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -206,6 +207,15 @@
             this.label10.Text = "Email";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btn_Chat
+            // 
+            this.btn_Chat.Location = new System.Drawing.Point(218, 50);
+            this.btn_Chat.Name = "btn_Chat";
+            this.btn_Chat.Size = new System.Drawing.Size(75, 41);
+            this.btn_Chat.TabIndex = 17;
+            this.btn_Chat.Text = "Nhắn tin";
+            this.btn_Chat.Click += new System.EventHandler(this.btn_Chat_Click);
+            // 
             // Custom_Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,6 +230,7 @@
             this.Controls.Add(this.btnDuyet);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.btn_detail);
+            this.Controls.Add(this.btn_Chat);
             this.Controls.Add(this.btnTheoDoi);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -252,5 +263,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btn_Chat;
     }
 }
