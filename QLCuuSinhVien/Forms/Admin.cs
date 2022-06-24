@@ -436,7 +436,7 @@ namespace QLCuuSinhVien.Forms
                     int IDBangCap = Convert.ToInt32(student.IDBangCap.ToString());
                     custom_Profile.TrinhDo = context.BangCap.FirstOrDefault(p => p.IDBangCap == IDBangCap).TenBangCap;
                     custom_Profile.CongViecHienTai = student.CongViecHienTai.ToString();
-                    custom_Profile.AnhDaiDien = Utility.LoadBitmapUnlocked(nguoiDung.AnhDaiDien);
+                    custom_Profile.AnhDaiDien = Utility.LoadBitmapUnlocked(student.AnhDaiDien);
                     if (HoSoQuanTam.Contains(student.IDNguoiDung.ToString()))
                     {
                         //btnTheoDoi.BackColor = Color.

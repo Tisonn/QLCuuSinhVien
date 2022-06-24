@@ -30,6 +30,7 @@ namespace QLCuuSinhVien.CustomControls
             data.Columns.Add("Mã Bài Viết", typeof(int));
             data.Columns.Add("Tiêu Đề", typeof(string));
             data.Columns.Add("Nội Dung", typeof(string));
+            data.Columns.Add("User",typeof(string));
             dgvReport.DataSource = data;
         }
 

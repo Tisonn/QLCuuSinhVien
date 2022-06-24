@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace QLCuuSinhVien
 {
-    public partial class TimKiem : Form
+    public partial class TimKiem : DevExpress.XtraEditors.XtraForm
     {
         public TimKiem()
         {
@@ -21,12 +21,15 @@ namespace QLCuuSinhVien
 
         private void LoadBangCap()
         {
+            cboNganh.Items.Add("");
             using (var context = new Context())
             {
                 List<BangCap> list = context.BangCap.ToList();
-                cboBangCap.DataSource = list;
-                cboBangCap.ValueMember = "IDBangCap";
-                cboBangCap.DisplayMember = "TenBangCap";
+
+                foreach (var item in list)
+                {
+                    cboBangCap.Items.Add(item.TenBangCap);
+                }
             }
         }
 
@@ -35,36 +38,63 @@ namespace QLCuuSinhVien
             using (var context = new Context())
             {
                 List<Nganh> list = context.Nganh.ToList();
-                cboNganh.DataSource = list;
-                cboNganh.DisplayMember = "TenNganh";
-                cboNganh.ValueMember = "IdNganh";
+                foreach (var item in list)
+                {
+                    cboNganh.Items.Add(item.TenNganh);
+                }
             }
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
+            string noidung = txtNoiDung.Text;
             string bangCap = cboBangCap.Text.ToString();
             string nganh = cboNganh.Text.ToString();
             using (var context = new Context())
             {
-                List<NguoiDung> nguoiDungTheoBangCap = (from A in context.NguoiDung
-                                                        join B in context.BangCap
-                                                        on A.IDBangCap equals B.IDBangCap
-                                                        join C in context.Nganh
-                                                        on A.IdNganh equals C.IdNganh
-                                                        where B.TenBangCap.Equals(bangCap)
-                                                        && C.TenNganh.Equals(nganh)
-                                                        select A).ToList();
-                                                     
+                List<NguoiDung> dsNguoiDung = new List<NguoiDung>();
+                if (bangCap.Equals("") && nganh.Equals(""))
+                {
+                    dsNguoiDung = context.NguoiDung.ToList();
+                }
+                else if (nganh.Equals(""))
+                {
+                    dsNguoiDung = (from A in context.NguoiDung
+                                   join B in context.BangCap
+                                   on A.IDBangCap equals B.IDBangCap
+                                   where B.TenBangCap == bangCap
+                                   && A.HoTen.Contains(noidung)
+                                   && A.TenDangNhap.Contains(noidung)
+                                   select A).ToList();
+                }
+                else if (bangCap.Equals(""))
+                {
+                    dsNguoiDung = (from A in context.NguoiDung
+                                   join B in context.Nganh
+                                   on A.IdNganh equals B.IdNganh
+                                   where B.TenNganh == nganh
+                                   && A.HoTen.Contains(noidung)
+                                   && A.TenDangNhap.Contains(noidung)
+                                   select A).ToList();
+                }
+                else
+                {
+                    dsNguoiDung = (from A in context.NguoiDung
+                                   join B in context.BangCap
+                                   on A.IDBangCap equals B.IDBangCap
+                                   join C in context.Nganh
+                                   on A.IdNganh equals C.IdNganh
+                                   where B.TenBangCap.Equals(bangCap)
+                                   && C.TenNganh.Equals(nganh)
+                                   && A.HoTen.Contains(noidung)
+                                   && A.TenDangNhap.Contains(noidung)
+                                   select A).ToList();
+                }
+
                 LocalVar.SET_DATA(null);
-                LocalVar.SET_DATA(nguoiDungTheoBangCap);
+                LocalVar.SET_DATA(dsNguoiDung);
                 Close();
             }
-        }
-
-        private void TimKiem_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
         }
     }
 }
