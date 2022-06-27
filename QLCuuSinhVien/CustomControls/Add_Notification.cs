@@ -77,7 +77,7 @@ namespace QLCuuSinhVien.CustomControls
             }
             catch (Exception)
             {
-                MessageBox.Show("Có lỗi", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Thành Công", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

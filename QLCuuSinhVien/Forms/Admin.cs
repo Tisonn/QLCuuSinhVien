@@ -14,7 +14,7 @@ using QLCuuSinhVien.CustomControl;
 
 namespace QLCuuSinhVien.Forms
 {
-    public partial class Admin : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class Admin : DevExpress.XtraEditors.XtraForm
     {
         NguoiDung nguoiDung;
 
